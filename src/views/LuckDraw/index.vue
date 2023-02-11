@@ -32,6 +32,7 @@
         >我的卡片</el-button>
       </el-badge>
     </div>
+
   </div>
 </template>
 
@@ -62,6 +63,7 @@ export default {
       ],
       total: 10,
       remainder: 0,
+      centerDialogVisible: false,
       prize: ''
     }
   },
@@ -98,6 +100,7 @@ export default {
     },
     // 抽奖结束会触发end回调
     endCallback(prize) {
+      // this.centerDialogVisible = true
       this.remainder--
       this.prize = prize.fonts[0].text
       this.incrementCard(prize.fonts[0].text)
@@ -128,26 +131,6 @@ export default {
   }
   &__card {
     margin-top: 20px;
-  }
-
-  .el-dialog__wrapper {
-    :deep .el-dialog {
-      background-color: #1d2136;
-      width: 500px;
-      padding: 10px 50px;
-      .el-dialog__header {
-        height: 36px;
-        line-height: 36px;
-        text-align: left;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        padding: 0 15px 0 20px;
-        border-bottom: 1px solid #0e0e1a;
-        .el-dialog__title {
-          color: #efedf5;
-        }
-      }
-    }
   }
 }
 </style>

@@ -1,11 +1,24 @@
 <template>
-  <div class="card__container" style="padding-top: 50px">
-    <el-button class="go__back" type="primary" @click.stop="goBack"
-      >返回</el-button
-    >
+  <div
+    class="card__container"
+    style="padding-top: 50px"
+  >
+    <el-button
+      class="go__back"
+      type="primary"
+      @click.stop="goBack"
+    >返回</el-button>
     <div style="width: 800px">
-      <el-carousel :interval="4000" type="card" height="400px" @change="change">
-        <el-carousel-item v-for="item in dataList" :key="item.name">
+      <el-carousel
+        :interval="4000"
+        type="card"
+        height="400px"
+        @change="change"
+      >
+        <el-carousel-item
+          v-for="item in dataList"
+          :key="item.name"
+        >
           <el-card :body-style="{ padding: '0px' }">
             <div :style="`background-image:url('${item.backgroudImage}');`">
               <div class="card__title">
@@ -25,7 +38,10 @@
     <div class="card-detail">
       <div style="font-size: 25px">使用说明</div>
       <ul class="card-detail-list">
-        <li v-for="(item, index) in details" :key="index">
+        <li
+          v-for="(item, index) in details"
+          :key="index"
+        >
           <span> {{ item.detail }}</span>
         </li>
       </ul>
@@ -127,7 +143,7 @@ export default {
   margin-right: 100px;
   align-self: end;
 }
-:deep .el-carousel {
+::v-deep .el-carousel {
   .el-carousel__mask {
     opacity: 0;
   }
