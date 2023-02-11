@@ -1,16 +1,13 @@
 <template>
   <div class="container">
     <div class="container__title">
-      包包大人您还有
-      <span
-        style="
+      您还有
+      <span style="
           font-size: 40px;
           font-family: led regular;
           color: rgb(56, 148, 255);
-        "
-      >
-        {{ remainder }}</span
-      >
+        ">
+        {{ remainder }}</span>
       机会
     </div>
     <LuckyWheel
@@ -24,29 +21,17 @@
       @end="endCallback"
     />
     <div class="container__card">
-      <el-badge :value="total - remainder" :max="100" class="item">
-        <el-button type="primary" @click.stop="handleCard">我的卡片</el-button>
+      <el-badge
+        :value="total - remainder"
+        :max="100"
+        class="item"
+      >
+        <el-button
+          type="primary"
+          @click.stop="handleCard"
+        >我的卡片</el-button>
       </el-badge>
     </div>
-
-    <el-dialog
-      title="提示"
-      :visible.sync="centerDialogVisible"
-      width="30%"
-      center
-      :close-on-click-modal="false"
-    >
-      <span
-        >恭喜包包大人抽中了
-        <span style="color: #fff; font-size: 16px"> {{ prize }}</span>
-      </span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="centerDialogVisible = false"
-          >确 定</el-button
-        >
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -77,7 +62,6 @@ export default {
       ],
       total: 10,
       remainder: 0,
-      centerDialogVisible: false,
       prize: ''
     }
   },
@@ -110,15 +94,18 @@ export default {
         const index = Math.floor(Math.random() * 6)
         // 调用stop停止旋转并传递中奖索引
         this.$refs.myLucky.stop(index)
-      }, 1000)
+      }, 1000 * Math.random())
     },
     // 抽奖结束会触发end回调
     endCallback(prize) {
-      this.centerDialogVisible = true
       this.remainder--
       this.prize = prize.fonts[0].text
       this.incrementCard(prize.fonts[0].text)
-      console.log(this.prize)
+      this.$message({
+        dangerouslyUseHTMLString: true,
+        message: `<strong>获得 <i>${this.prize}</i></strong>`,
+        type: 'success'
+      })
     },
     handleCard() {
       this.$router.push({ path: '/card' })
